@@ -1,10 +1,13 @@
 package com.iammukesh.testnavi;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -26,7 +29,11 @@ import fragments.profile_fragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    SharedPreferences sharedPreferences;
+    public String test = "";
+    public String game = "";
+    public String business = "";
+    public String develop = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +46,11 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
+         sharedPreferences = this.getSharedPreferences("com.iammukesh.testnavi", Context.MODE_PRIVATE);
+        test = sharedPreferences.getString("socialcheck",null);
+        game = sharedPreferences.getString("gamecheck", null);
+        business = sharedPreferences.getString("businesscheck", null);
+        develop = sharedPreferences.getString("developercheck", null);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         openFragment(new BlankFragment());
@@ -75,13 +86,67 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void saveProfileOption(View view){
+
+
+
         CheckBox socialcheck = (CheckBox) findViewById(R.id.socialcheck);
+        CheckBox gamecheck = (CheckBox) findViewById(R.id.gamecheck);
+        CheckBox businesscheck = (CheckBox) findViewById(R.id.businesscheck);
+        CheckBox developercheck = (CheckBox) findViewById(R.id.developercheck);
         if(socialcheck.isChecked()==true){
-            Toast.makeText(getApplicationContext(),"Social is checked",Toast.LENGTH_SHORT).show();
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+           editor.putString("socialcheck", "active");
+            editor.commit();
+             test = sharedPreferences.getString("socialcheck",null);
+            Log.i("test",test);
         }
-    }
-    public void toast(View view){
-        Toast.makeText(getApplicationContext(),"Hello",Toast.LENGTH_SHORT).show();
+        else{
+           sharedPreferences.edit().remove("socialcheck").commit();
+            //sharedPreferences.edit().putString("socialcheck", null).apply();
+             test = null;
+        }
+        if(gamecheck.isChecked()==true){
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("gamecheck", "active");
+            editor.commit();
+
+             game = sharedPreferences.getString("gamecheck",null);
+        }
+        else{
+            sharedPreferences.edit().remove("gamecheck").commit();
+            //sharedPreferences.edit().putString("socialcheck", null).apply();\
+            game = null;
+        }
+        if(businesscheck.isChecked()==true){
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("businesscheck", "active");
+            editor.commit();
+
+             business = sharedPreferences.getString("businesscheck",null);
+        }
+        else{
+            sharedPreferences.edit().remove("businesscheck").commit();
+            //sharedPreferences.edit().putString("socialcheck", null).apply();
+            business = null;
+        }
+        if(developercheck.isChecked()==true){
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("developercheck", "active");
+            editor.commit();
+
+             develop = sharedPreferences.getString("developercheck",null);
+        }
+        else{
+            sharedPreferences.edit().remove("developercheck").commit();
+            //sharedPreferences.edit().putString("socialcheck", null).apply();
+            develop = null;
+        }
+
+        Toast.makeText(getApplicationContext(),"Profile has been updated",Toast.LENGTH_SHORT).show();
     }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
