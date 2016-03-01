@@ -26,15 +26,16 @@
             android:layout_marginTop="10dp" />
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:id="@+id/imageView2"
             android:layout_row="1"
             android:layout_column="0"
             android:src="@drawable/profileiconimage"
             android:layout_marginBottom="10dp"
             android:layout_columnSpan="2"
-            android:layout_rowSpan="6" />
+            android:layout_rowSpan="6"
+            android:layout_marginRight="40dp" />
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -82,7 +83,20 @@
             android:background="?attr/colorPrimary"
             android:textColor="#ffffff"
             android:nestedScrollingEnabled="false"
-            android:onClick="saveProfileOption" />
+            android:onClick="saveProfileOption"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Note:- Optimization depends on these profile. Please choose profile which suits your need."
+            android:id="@+id/textView4"
+            android:layout_row="8"
+            android:layout_column="1"
+            android:layout_columnSpan="4"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
 
     </GridLayout>
 </FrameLayout>
