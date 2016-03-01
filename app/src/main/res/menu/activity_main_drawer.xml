@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_navigation_profile"
+            android:title="Change Profile" />
+        <item
+            android:id="@+id/optimization"
+            android:icon="@drawable/ic_navigation_optimize"
+            android:title="Optimization Level" />
+        <item
+            android:id="@+id/geosetting"
+            android:icon="@drawable/ic_navigation_geo"
+            android:title="Geo Settings" />
+        <item
+            android:id="@+id/setting"
+            android:icon="@drawable/ic_navigation_setting"
+            android:title="Setting" />
+    </group>
+
+    <item android:title="Log">
+        <menu>
+            <item
+                android:id="@+id/batterylog"
+                android:icon="@drawable/ic_navigation_battery"
+                android:title="Battery" />
+            <item
+                android:id="@+id/ramlog"
+                android:icon="@drawable/ic_navigation_ram"
+                android:title="Ram" />
+        </menu>
+    </item>
+
+</menu>
