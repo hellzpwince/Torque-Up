@@ -13,15 +13,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@android:drawable/ic_menu_upload" />
+        android:src="@drawable/profileiconimage" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:paddingTop="10dp"
         android:text="Torque Up"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 

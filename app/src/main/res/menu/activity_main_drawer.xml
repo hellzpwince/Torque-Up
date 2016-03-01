@@ -18,9 +18,10 @@
             android:id="@+id/setting"
             android:icon="@drawable/ic_navigation_setting"
             android:title="Setting" />
+        
     </group>
 
-    <item android:title="Log">
+    <item android:title="Logs">
         <menu>
             <item
                 android:id="@+id/batterylog"

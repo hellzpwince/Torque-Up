@@ -5,10 +5,52 @@
     tools:context="fragments.BlankFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        android:background="#ffffff"/>
 
+    <FrameLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Optimization Level"
+                android:id="@+id/textView3"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="20dp"
+                android:textSize="20dp"
+                android:layout_marginBottom="10dp" />
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/optimizationseekbar"
+                android:layout_gravity="center"
+                android:progress="40"
+                android:max="100"
+                android:splitTrack="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="40%"
+                android:id="@+id/percentscale"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*High value can cause multitasking issue. Use only when not using any thread or background application"
+                android:id="@+id/textView5"
+                android:layout_marginTop="10dp" />
+
+        </LinearLayout>
+
+    </FrameLayout>
 </FrameLayout>
