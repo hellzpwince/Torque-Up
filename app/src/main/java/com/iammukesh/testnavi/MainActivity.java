@@ -1,8 +1,10 @@
 package com.iammukesh.testnavi;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import fragments.BatteryFragment;
+import fragments.BlankFragment;
+import fragments.GeoSettingFragement;
+import fragments.RamFragment;
+import fragments.SettingFragment;
+import fragments.profile_fragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +41,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        openFragment(new BlankFragment());
     }
 
     @Override
@@ -46,8 +56,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+
         return true;
     }
 
@@ -58,14 +67,15 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
+    private void openFragment(final android.support.v4.app.Fragment fragment){
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
+    }
 
+    public void toast(View view){
+        Toast.makeText(getApplicationContext(),"Hello",Toast.LENGTH_SHORT).show();
+    }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -73,16 +83,24 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.profile) {
-            Toast.makeText(MainActivity.this, "Hello", Toast.LENGTH_SHORT).show();
+            openFragment(new profile_fragment());
         } else if (id == R.id.optimization) {
-
+            openFragment(new BlankFragment());
         } else if (id == R.id.geosetting) {
+
+            openFragment(new GeoSettingFragement());
 
         } else if (id == R.id.setting) {
 
+            openFragment(new SettingFragment());
+
         } else if (id == R.id.batterylog) {
 
+            openFragment(new BatteryFragment());
+
         } else if (id == R.id.ramlog) {
+
+            openFragment(new RamFragment());
 
         }
 
