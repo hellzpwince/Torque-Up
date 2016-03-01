@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import fragments.BatteryFragment;
@@ -73,6 +74,12 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
     }
 
+    public void saveProfileOption(View view){
+        CheckBox socialcheck = (CheckBox) findViewById(R.id.socialcheck);
+        if(socialcheck.isChecked()==true){
+            Toast.makeText(getApplicationContext(),"Social is checked",Toast.LENGTH_SHORT).show();
+        }
+    }
     public void toast(View view){
         Toast.makeText(getApplicationContext(),"Hello",Toast.LENGTH_SHORT).show();
     }

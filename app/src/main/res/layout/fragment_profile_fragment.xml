@@ -5,9 +5,84 @@
     tools:context="fragments.profile_fragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello Profile Fragment" />
+        android:layout_gravity="center_horizontal|bottom">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Profile Setting"
+            android:id="@+id/textView2"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:textSize="20sp"
+            android:textColor="#717171"
+            android:typeface="sans"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/imageView2"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:src="@drawable/profileiconimage"
+            android:layout_marginBottom="10dp"
+            android:layout_columnSpan="2"
+            android:layout_rowSpan="6" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Social Apps"
+            android:id="@+id/socialcheck"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Games"
+            android:id="@+id/gamecheck"
+            android:layout_row="3"
+            android:layout_column="2"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Business Apps"
+            android:id="@+id/businesscheck"
+            android:layout_row="4"
+            android:layout_column="2"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Developer Apps"
+            android:id="@+id/developercheck"
+            android:layout_row="5"
+            android:layout_column="2"
+            android:checked="false" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:id="@+id/profilesavebtn"
+            android:layout_row="7"
+            android:layout_column="2"
+            android:background="?attr/colorPrimary"
+            android:textColor="#ffffff"
+            android:nestedScrollingEnabled="false"
+            android:onClick="saveProfileOption" />
+
+    </GridLayout>
 </FrameLayout>
