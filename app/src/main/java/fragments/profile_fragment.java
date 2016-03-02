@@ -1,6 +1,7 @@
 package fragments;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ public class profile_fragment extends Fragment {
     private CheckBox developercheck;
     private CheckBox gamecheck;
     private View rootView;
+    private EditText rootchangename;
     public profile_fragment() {
         // Required empty public constructor
     }
@@ -57,7 +60,6 @@ public class profile_fragment extends Fragment {
         gamecheck = (CheckBox) rootView.findViewById(R.id.gamecheck);
         developercheck = (CheckBox) rootView.findViewById(R.id.developercheck);
         businesscheck = (CheckBox) rootView.findViewById(R.id.businesscheck);
-
     }
     private void checkSavedPref(){
          main=(MainActivity)getActivity();
@@ -77,6 +79,7 @@ public class profile_fragment extends Fragment {
            // Toast.makeText(rootView.getContext(), "Active", Toast.LENGTH_SHORT).show();
             businesscheck.setChecked(true);
         }
+
 
     }
 

@@ -2,11 +2,11 @@ package com.iammukesh.testnavi;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,8 +18,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import fragments.BatteryFragment;
 import fragments.BlankFragment;
 import fragments.GeoSettingFragement;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     public String game = "";
     public String business = "";
     public String develop = "";
+    public String servicetest ="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,15 +49,31 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
          sharedPreferences = this.getSharedPreferences("com.iammukesh.testnavi", Context.MODE_PRIVATE);
-        test = sharedPreferences.getString("socialcheck",null);
+        test = sharedPreferences.getString("socialcheck", null);
         game = sharedPreferences.getString("gamecheck", null);
         business = sharedPreferences.getString("businesscheck", null);
         develop = sharedPreferences.getString("developercheck", null);
+        servicetest=sharedPreferences.getString("ServiceTest",null);
+     //  Log.i("headerName",headerProfileName);
+       // Toast.makeText(MainActivity.this, headerProfileName, Toast.LENGTH_LONG).show();
+        startService();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         openFragment(new BlankFragment());
     }
 
+    public void startService(){
+    startService(new Intent(getBaseContext(),OptimizeService.class));
+    }
+public void changewifi(View view){
+    WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
+    wifiManager.setWifiEnabled(true);
+    boolean wifiEnabled = wifiManager.isWifiEnabled();
+    Toast.makeText(MainActivity.this, wifiEnabled+ " " , Toast.LENGTH_SHORT).show();
+    Toast.makeText(MainActivity.this, servicetest, Toast.LENGTH_SHORT).show();
+
+}
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -175,9 +193,15 @@ public class MainActivity extends AppCompatActivity
             openFragment(new RamFragment());
 
         }
+        else if (id == R.id.restartservice) {
+
+            Toast.makeText(MainActivity.this, "Testing Restart service", Toast.LENGTH_SHORT).show();
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

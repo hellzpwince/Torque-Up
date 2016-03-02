@@ -73,30 +73,30 @@
             android:layout_column="2"
             android:checked="false" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Note:- Optimization depends on these profile. Please choose profile which suits your need."
+            android:id="@+id/textView4"
+            android:layout_row="9"
+            android:layout_column="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_columnSpan="3" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Save"
             android:id="@+id/profilesavebtn"
-            android:layout_row="7"
+            android:layout_row="10"
             android:layout_column="2"
             android:background="?attr/colorPrimary"
             android:textColor="#ffffff"
             android:nestedScrollingEnabled="false"
             android:onClick="saveProfileOption"
             android:layout_marginTop="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Note:- Optimization depends on these profile. Please choose profile which suits your need."
-            android:id="@+id/textView4"
-            android:layout_row="8"
-            android:layout_column="1"
-            android:layout_columnSpan="4"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp" />
 
     </GridLayout>
 </FrameLayout>

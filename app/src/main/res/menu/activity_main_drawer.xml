@@ -18,6 +18,7 @@
             android:id="@+id/setting"
             android:icon="@drawable/ic_navigation_setting"
             android:title="Setting" />
+
         
     </group>
 
@@ -33,5 +34,15 @@
                 android:title="Ram" />
         </menu>
     </item>
+
+    <item android:title="Main Service">
+        <menu>
+            <item
+                android:id="@+id/restartservice"
+                android:icon="@drawable/ic_restartservice"
+                android:title="Restart Service" />
+        </menu>
+    </item>
+
 
 </menu>
