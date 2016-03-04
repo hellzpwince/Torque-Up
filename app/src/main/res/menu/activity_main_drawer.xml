@@ -22,18 +22,6 @@
         
     </group>
 
-    <item android:title="Logs">
-        <menu>
-            <item
-                android:id="@+id/batterylog"
-                android:icon="@drawable/ic_navigation_battery"
-                android:title="Battery" />
-            <item
-                android:id="@+id/ramlog"
-                android:icon="@drawable/ic_navigation_ram"
-                android:title="Ram" />
-        </menu>
-    </item>
 
     <item android:title="Main Service">
         <menu>

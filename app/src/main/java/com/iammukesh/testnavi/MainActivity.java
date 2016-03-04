@@ -1,5 +1,7 @@
 package com.iammukesh.testnavi;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +23,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.List;
+
 import fragments.BatteryFragment;
 import fragments.BlankFragment;
 import fragments.GeoSettingFragement;
@@ -36,6 +43,9 @@ public class MainActivity extends AppCompatActivity
     public String business = "";
     public String develop = "";
     public String servicetest ="";
+    CheckBox backgroundCheck;
+    CheckBox screenOffKill;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +58,8 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-         sharedPreferences = this.getSharedPreferences("com.iammukesh.testnavi", Context.MODE_PRIVATE);
+         sharedPreferences = getSharedPreferences("com.iammukesh.testnavi", Context.MODE_PRIVATE);
+
         test = sharedPreferences.getString("socialcheck", null);
         game = sharedPreferences.getString("gamecheck", null);
         business = sharedPreferences.getString("businesscheck", null);
@@ -102,7 +113,37 @@ public void changewifi(View view){
     private void openFragment(final android.support.v4.app.Fragment fragment){
         getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
     }
+    public void closeSocialapps(View view){
+        ActivityManager am = (ActivityManager) getSystemService(Activity.ACTIVITY_SERVICE);
+        am.killBackgroundProcesses("com.facebook.katana");
+        am.killBackgroundProcesses("com.facebook.orca");
+        am.killBackgroundProcesses("com.whatsapp");
+        Toast.makeText(MainActivity.this, "Major Social Apps has been closed", Toast.LENGTH_SHORT).show();
+    }
+    public void saveSettingPref(View view){
 
+        backgroundCheck=(CheckBox)findViewById(R.id.remainInBackground);
+        screenOffKill=(CheckBox)findViewById(R.id.screenOffKill);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        if(backgroundCheck.isChecked()==true){
+            editor.putString("backgroundworking","active");
+            editor.commit();
+            System.out.println(sharedPreferences.getAll());
+        }
+        else{
+            sharedPreferences.edit().remove("backgroundworking").commit();
+        }
+        if(screenOffKill.isChecked()==true){
+            editor.putString("screenoffkill", "active");
+            editor.commit();
+        }
+        else{
+            sharedPreferences.edit().remove("screenoffkill").commit();
+        }
+
+        Toast.makeText(this, "Setting has been saved", Toast.LENGTH_SHORT).show();
+
+    }
     public void saveProfileOption(View view){
 
 
@@ -164,7 +205,7 @@ public void changewifi(View view){
             develop = null;
         }
 
-        Toast.makeText(getApplicationContext(),"Profile has been updated",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Profile has been updated", Toast.LENGTH_SHORT).show();
     }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -184,18 +225,10 @@ public void changewifi(View view){
 
             openFragment(new SettingFragment());
 
-        } else if (id == R.id.batterylog) {
-
-            openFragment(new BatteryFragment());
-
-        } else if (id == R.id.ramlog) {
-
-            openFragment(new RamFragment());
-
         }
         else if (id == R.id.restartservice) {
 
-            Toast.makeText(MainActivity.this, "Testing Restart service", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Restarting Service", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -203,5 +236,6 @@ public void changewifi(View view){
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 }
