@@ -17,38 +17,78 @@ import java.util.TimerTask;
  * Created by mukeshjoshi on 02/03/16.
  */
 public class OptimizeService extends Service{
-    protected   int rValue=START_NOT_STICKY;
+
+    /*Variable declaration
+    *
+    * Optimize Service is responsible for all background work
+    *
+    * We are using SharedPreferences to store our Key values
+    *
+    * */
+    private int interval=4000;
     private String returnType="";
     SharedPreferences sharedPreferences;
+    public String test = "";
+    public String game = "";
+    public String business = "";
+    public String develop = "";
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
     @Override
-    public int onStartCommand(Intent intent,int flags,int startId){
+    public int onStartCommand(Intent intent,int flags,int startId) {
+
+
+
+    /*Fetching all the stored values from SharedPreferences*/
+
+        sharedPreferences = getSharedPreferences("com.iammukesh.testnavi.hellzpwince", Context.MODE_PRIVATE);
+        test = sharedPreferences.getString("socialcheck", null);
+        game = sharedPreferences.getString("gamecheck", null);
+        business = sharedPreferences.getString("businesscheck", null);
+        develop = sharedPreferences.getString("developercheck", null);
+        returnType = sharedPreferences.getString("backgroundworking", null);
+
+        /*rValue variable defines whether background service will stick in background or not.*/
+        /*Using Timer to perform background job*/
+        /*Timer's interval time is based on serveral factors like Optimization level and GEO location*/
+
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
 
             @Override
             public void run() {
-                Log.i("username", "hello");
-                System.out.println(sharedPreferences.getAll());
-                //Toast.makeText(OptimizeService.this, sharedPreferences.getString("username","failed"), Toast.LENGTH_SHORT).show();
+                test = sharedPreferences.getString("socialcheck", null);
+                game = sharedPreferences.getString("gamecheck", null);
+                business = sharedPreferences.getString("businesscheck", null);
+                develop = sharedPreferences.getString("developercheck", null);
+                returnType = sharedPreferences.getString("backgroundworking", null);
+              if(returnType==null){
+                Log.i("username", "mukesh");}
+                else{
+                  Log.i("Username","Joshi");
+              }
+                /*Log.i("background", returnType);*/
             }
 
-        }, 0, 4000);
-        return rValue;
+        }, 0, interval);
+        if (returnType == null) {
+            return START_NOT_STICKY;
+
+        } else {
+            return START_STICKY;
+        }
     }
     @Override
     public void onCreate() {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        returnType = sharedPreferences.getString("backgroundworking", null);
-        if(returnType=="active"){
-            rValue=START_STICKY;
 
-        }
+        /*This function will run as service activity is created*/
+        /*We are assigning sharedprefernce object*/
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
       //  Toast.makeText(OptimizeService.this, "Helloasdas", Toast.LENGTH_SHORT).show();
     }
 }

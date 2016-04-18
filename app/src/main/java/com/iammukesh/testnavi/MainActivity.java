@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity
     public String business = "";
     public String develop = "";
     public String servicetest ="";
+    public String background = "";
+    public String screenKill ="";
+    public int progressBar;
     CheckBox backgroundCheck;
     CheckBox screenOffKill;
 
@@ -58,13 +61,16 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-         sharedPreferences = getSharedPreferences("com.iammukesh.testnavi", Context.MODE_PRIVATE);
+         sharedPreferences = getSharedPreferences("com.iammukesh.testnavi.hellzpwince", Context.MODE_PRIVATE);
 
         test = sharedPreferences.getString("socialcheck", null);
         game = sharedPreferences.getString("gamecheck", null);
         business = sharedPreferences.getString("businesscheck", null);
         develop = sharedPreferences.getString("developercheck", null);
         servicetest=sharedPreferences.getString("ServiceTest",null);
+        background = sharedPreferences.getString("backgroundworking", null);
+        screenKill=sharedPreferences.getString("screenoffkill",null);
+        progressBar=sharedPreferences.getInt("optimizelevel", 0);
      //  Log.i("headerName",headerProfileName);
        // Toast.makeText(MainActivity.this, headerProfileName, Toast.LENGTH_LONG).show();
         startService();
@@ -125,10 +131,9 @@ public void changewifi(View view){
         backgroundCheck=(CheckBox)findViewById(R.id.remainInBackground);
         screenOffKill=(CheckBox)findViewById(R.id.screenOffKill);
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        if(backgroundCheck.isChecked()==true){
+        if(backgroundCheck.isChecked() == true) {
             editor.putString("backgroundworking","active");
             editor.commit();
-            System.out.println(sharedPreferences.getAll());
         }
         else{
             sharedPreferences.edit().remove("backgroundworking").commit();
@@ -141,7 +146,7 @@ public void changewifi(View view){
             sharedPreferences.edit().remove("screenoffkill").commit();
         }
 
-        Toast.makeText(this, "Setting has been saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Setting has been saved.It will be applied after restart.", Toast.LENGTH_SHORT).show();
 
     }
     public void saveProfileOption(View view){
@@ -152,13 +157,12 @@ public void changewifi(View view){
         CheckBox gamecheck = (CheckBox) findViewById(R.id.gamecheck);
         CheckBox businesscheck = (CheckBox) findViewById(R.id.businesscheck);
         CheckBox developercheck = (CheckBox) findViewById(R.id.developercheck);
-        if(socialcheck.isChecked()==true){
+        if (socialcheck.isChecked()==true){
 
             SharedPreferences.Editor editor = sharedPreferences.edit();
            editor.putString("socialcheck", "active");
             editor.commit();
              test = sharedPreferences.getString("socialcheck",null);
-            Log.i("test",test);
         }
         else{
            sharedPreferences.edit().remove("socialcheck").commit();
