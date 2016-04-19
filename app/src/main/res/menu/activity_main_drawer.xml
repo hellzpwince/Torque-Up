@@ -18,20 +18,19 @@
             android:id="@+id/setting"
             android:icon="@drawable/ic_navigation_setting"
             android:title="Setting" />
+
         
     </group>
 
-    <item android:title="Logs">
+
+    <item android:title="Main Service">
         <menu>
             <item
-                android:id="@+id/batterylog"
-                android:icon="@drawable/ic_navigation_battery"
-                android:title="Battery" />
-            <item
-                android:id="@+id/ramlog"
-                android:icon="@drawable/ic_navigation_ram"
-                android:title="Ram" />
+                android:id="@+id/restartservice"
+                android:icon="@drawable/ic_restartservice"
+                android:title="Restart Service" />
         </menu>
     </item>
+
 
 </menu>

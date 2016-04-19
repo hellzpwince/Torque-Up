@@ -32,7 +32,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/optimizationseekbar"
                 android:layout_gravity="center"
-                android:progress="40"
                 android:max="100"
                 android:splitTrack="false" />
 
@@ -49,6 +48,14 @@
                 android:text="*High value can cause multitasking issue. Use only when not using any thread or background application"
                 android:id="@+id/textView5"
                 android:layout_marginTop="10dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Close Social Apps"
+                android:id="@+id/button"
+                android:layout_gravity="center_horizontal"
+                android:onClick="closeSocialapps" />
 
         </LinearLayout>
 

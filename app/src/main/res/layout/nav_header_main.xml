@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:text="Torque Up"
+        android:id="@+id/headerName"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView

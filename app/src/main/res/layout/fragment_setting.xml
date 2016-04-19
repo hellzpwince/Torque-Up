@@ -5,9 +5,50 @@
     tools:context="fragments.SettingFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_gravity="left|top">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Basic Settings"
+            android:id="@+id/textView7"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="5dp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remain in background"
+            android:id="@+id/remainInBackground"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kill as screen goes OFF"
+            android:id="@+id/screenOffKill"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:checked="false" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:id="@+id/saveSettingbtn"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:background="@color/colorAccent"
+            android:textColor="#ffffff"
+            android:onClick="saveSettingPref" />
+    </GridLayout>
 </FrameLayout>

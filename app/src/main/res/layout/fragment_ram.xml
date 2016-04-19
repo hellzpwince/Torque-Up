@@ -4,10 +4,71 @@
     android:layout_height="match_parent"
     tools:context="fragments.RamFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test Wifi"
+            android:id="@+id/testwifi"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="changewifi"
+            android:background="@color/colorAccent"
+            android:textColor="#ffffff"
+            android:padding="5dp"
+            android:layout_margin="10dp"
+            android:layout_row="0"
+            android:layout_column="0" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test Flight Mode"
+            android:id="@+id/testflight"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorAccent"
+            android:textColor="#ffffff"
+            android:padding="5dp"
+            android:layout_margin="10dp"
+            android:layout_row="0"
+            android:layout_column="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test Bluetooth"
+            android:id="@+id/testbluetooth"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorAccent"
+            android:textColor="#ffffff"
+            android:padding="5dp"
+            android:layout_margin="10dp"
+            android:layout_row="1"
+            android:layout_column="0" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test Mobile Network"
+            android:id="@+id/testdatanetwork"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorAccent"
+            android:textColor="#ffffff"
+            android:padding="5dp"
+            android:layout_margin="10dp"
+            android:layout_row="1"
+            android:layout_column="1" />
+
+    </GridLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top">
+
+    </LinearLayout>
 </FrameLayout>

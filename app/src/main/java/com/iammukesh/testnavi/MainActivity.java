@@ -1,12 +1,14 @@
 package com.iammukesh.testnavi;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,7 +20,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.List;
 
 import fragments.BatteryFragment;
 import fragments.BlankFragment;
@@ -34,6 +43,19 @@ public class MainActivity extends AppCompatActivity
     public String game = "";
     public String business = "";
     public String develop = "";
+    public String servicetest ="";
+    public String background = "";
+    public String screenKill ="";
+    public String useGPStest="";
+    public String optimizeAsILeavetest="";
+    public String leaveNetOntest="";
+    public Integer progressBar;
+    CheckBox backgroundCheck;
+    CheckBox screenOffKill;
+    CheckBox leaveNetOn;
+    CheckBox useGPS;
+    CheckBox optimizeAsILeave;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,16 +68,43 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-         sharedPreferences = this.getSharedPreferences("com.iammukesh.testnavi", Context.MODE_PRIVATE);
-        test = sharedPreferences.getString("socialcheck",null);
+         sharedPreferences = getSharedPreferences("com.iammukesh.testnavi.hellzpwince", Context.MODE_PRIVATE);
+        test = sharedPreferences.getString("socialcheck", null);
         game = sharedPreferences.getString("gamecheck", null);
+        progressBar=sharedPreferences.getInt("optimizelevel", 0);
         business = sharedPreferences.getString("businesscheck", null);
         develop = sharedPreferences.getString("developercheck", null);
+        servicetest=sharedPreferences.getString("ServiceTest",null);
+        background = sharedPreferences.getString("backgroundworking", null);
+        screenKill=sharedPreferences.getString("screenoffkill", null);
+        useGPStest=sharedPreferences.getString("useGPS", null);
+        leaveNetOntest=sharedPreferences.getString("leaveNetOn", null);
+        optimizeAsILeavetest=sharedPreferences.getString("optimizeAsILeave", null);
+
+
+         Log.i("headerName",String.valueOf(game));
+         Log.i("headerName",String.valueOf(develop));
+         Log.i("headerName",String.valueOf(background));
+         Log.i("headerName",String.valueOf(progressBar));
+       // Toast.makeText(MainActivity.this, headerProfileName, Toast.LENGTH_LONG).show();
+        startService();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         openFragment(new BlankFragment());
     }
 
+    public void startService(){
+    startService(new Intent(getBaseContext(),OptimizeService.class));
+    }
+public void changewifi(View view){
+    WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
+    wifiManager.setWifiEnabled(true);
+    boolean wifiEnabled = wifiManager.isWifiEnabled();
+    Toast.makeText(MainActivity.this, wifiEnabled+ " " , Toast.LENGTH_SHORT).show();
+    Toast.makeText(MainActivity.this, servicetest, Toast.LENGTH_SHORT).show();
+
+}
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -84,7 +133,77 @@ public class MainActivity extends AppCompatActivity
     private void openFragment(final android.support.v4.app.Fragment fragment){
         getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
     }
+    public void closeSocialapps(View view){
+        ActivityManager am = (ActivityManager) getSystemService(Activity.ACTIVITY_SERVICE);
+        am.killBackgroundProcesses("com.facebook.katana");
+        am.killBackgroundProcesses("com.facebook.orca");
+        am.killBackgroundProcesses("com.whatsapp");
+        Toast.makeText(MainActivity.this, "Major Social Apps has been closed", Toast.LENGTH_SHORT).show();
+    }
 
+    public void saveGeoSetting(View view){
+        useGPS=(CheckBox)findViewById(R.id.GPScheckbox);
+        optimizeAsILeave=(CheckBox)findViewById(R.id.leaveoptimize);
+        leaveNetOn=(CheckBox)findViewById(R.id.networkCheckbox);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        if(useGPS.isChecked() == true) {
+
+            editor.putString("useGPS","active");
+            editor.commit();
+            useGPStest = sharedPreferences.getString("useGPS",null);
+        }
+        else{
+            sharedPreferences.edit().remove("useGPS").commit();
+            useGPStest=null;
+        }
+        if(optimizeAsILeave.isChecked() == true) {
+            editor.putString("optimizeAsILeave", "active");
+            editor.commit();
+            optimizeAsILeavetest = sharedPreferences.getString("optimizeAsILeave",null);
+        }
+        else{
+            sharedPreferences.edit().remove("optimizeAsILeave").commit();
+            optimizeAsILeavetest=null;
+        }
+        if(leaveNetOn.isChecked() == true) {
+            editor.putString("leaveNetOn","active");
+            editor.commit();
+            leaveNetOntest = sharedPreferences.getString("leaveNetOn",null);
+        }
+        else{
+            sharedPreferences.edit().remove("leaveNetOn").commit();
+            leaveNetOntest=null;
+        }
+    }
+
+    public void saveSettingPref(View view){
+
+        backgroundCheck=(CheckBox)findViewById(R.id.remainInBackground);
+        screenOffKill=(CheckBox)findViewById(R.id.screenOffKill);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        if(backgroundCheck.isChecked() == true) {
+            editor.putString("backgroundworking","active");
+            editor.commit();
+        }
+        else{
+            sharedPreferences.edit().remove("backgroundworking").commit();
+        }
+        if(screenOffKill.isChecked()==true){
+            editor.putString("screenoffkill", "active");
+            editor.commit();
+        }
+        else{
+            sharedPreferences.edit().remove("screenoffkill").commit();
+        }
+
+        Toast.makeText(this, "Setting has been saved.It will be applied after restart.", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void saveOptimizationProgress(View view){
+        SeekBar optimizeseekbar = (SeekBar) findViewById(R.id.optimizationseekbar);
+
+    }
     public void saveProfileOption(View view){
 
 
@@ -93,13 +212,12 @@ public class MainActivity extends AppCompatActivity
         CheckBox gamecheck = (CheckBox) findViewById(R.id.gamecheck);
         CheckBox businesscheck = (CheckBox) findViewById(R.id.businesscheck);
         CheckBox developercheck = (CheckBox) findViewById(R.id.developercheck);
-        if(socialcheck.isChecked()==true){
+        if (socialcheck.isChecked()==true){
 
             SharedPreferences.Editor editor = sharedPreferences.edit();
            editor.putString("socialcheck", "active");
             editor.commit();
              test = sharedPreferences.getString("socialcheck",null);
-            Log.i("test",test);
         }
         else{
            sharedPreferences.edit().remove("socialcheck").commit();
@@ -146,7 +264,7 @@ public class MainActivity extends AppCompatActivity
             develop = null;
         }
 
-        Toast.makeText(getApplicationContext(),"Profile has been updated",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Profile has been updated", Toast.LENGTH_SHORT).show();
     }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -166,13 +284,10 @@ public class MainActivity extends AppCompatActivity
 
             openFragment(new SettingFragment());
 
-        } else if (id == R.id.batterylog) {
+        }
+        else if (id == R.id.restartservice) {
 
-            openFragment(new BatteryFragment());
-
-        } else if (id == R.id.ramlog) {
-
-            openFragment(new RamFragment());
+            Toast.makeText(MainActivity.this, "Restarting Service", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -180,4 +295,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

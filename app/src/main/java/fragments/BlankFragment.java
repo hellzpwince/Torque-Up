@@ -37,10 +37,19 @@ public class BlankFragment extends Fragment {
         rootView= inflater.inflate(R.layout.fragment_blank, container, false);
         main =(MainActivity)getActivity();
         optimizeseekbar=(SeekBar)rootView.findViewById(R.id.optimizationseekbar);
+
         percentscale=(TextView)rootView.findViewById(R.id.percentscale);
+        SharedPreferences sharedpref1 = main.getSharedPreferences("com.iammukesh.testnavi.hellzpwince", Context.MODE_PRIVATE);
+        percentscale.setText(String.valueOf(sharedpref1.getInt("optimizelevel", 0)) + "%");
+        optimizeseekbar.setProgress(sharedpref1.getInt("optimizelevel", 0));
         optimizeseekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                SharedPreferences sharedpref = main.getSharedPreferences("com.iammukesh.testnavi.hellzpwince", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpref.edit();
+                editor.putInt("optimizelevel", optimizeseekbar.getProgress());
+                //Log.i("progress", String.valueOf(sharedpref.getInt("optimizelevel", 0)));
+                editor.commit();
                 percentscale.setText(progress + "%");
             }
 
@@ -50,14 +59,12 @@ public class BlankFragment extends Fragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                SharedPreferences sharedpref =main.getSharedPreferences("com.iammukesh.testnavi", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedpref.edit();
-                editor.putString("optimizelevel",Integer.toString(optimizeseekbar.getProgress()));
-                editor.commit();
-                Toast.makeText(rootView.getContext(), "Optimization Level Setting Saved", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(rootView.getContext(), "Optimization Level has been Applied", Toast.LENGTH_SHORT).show();
             }
         });
     return rootView;
     }
+
 
 }
