@@ -32,7 +32,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/optimizationseekbar"
                 android:layout_gravity="center"
-                android:progress="40"
                 android:max="100"
                 android:splitTrack="false" />
 

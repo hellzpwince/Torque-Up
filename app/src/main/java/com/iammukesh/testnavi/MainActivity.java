@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,9 +46,15 @@ public class MainActivity extends AppCompatActivity
     public String servicetest ="";
     public String background = "";
     public String screenKill ="";
-    public int progressBar;
+    public String useGPStest="";
+    public String optimizeAsILeavetest="";
+    public String leaveNetOntest="";
+    public Integer progressBar;
     CheckBox backgroundCheck;
     CheckBox screenOffKill;
+    CheckBox leaveNetOn;
+    CheckBox useGPS;
+    CheckBox optimizeAsILeave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,16 +69,23 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
          sharedPreferences = getSharedPreferences("com.iammukesh.testnavi.hellzpwince", Context.MODE_PRIVATE);
-
         test = sharedPreferences.getString("socialcheck", null);
         game = sharedPreferences.getString("gamecheck", null);
+        progressBar=sharedPreferences.getInt("optimizelevel", 0);
         business = sharedPreferences.getString("businesscheck", null);
         develop = sharedPreferences.getString("developercheck", null);
         servicetest=sharedPreferences.getString("ServiceTest",null);
         background = sharedPreferences.getString("backgroundworking", null);
-        screenKill=sharedPreferences.getString("screenoffkill",null);
-        progressBar=sharedPreferences.getInt("optimizelevel", 0);
-     //  Log.i("headerName",headerProfileName);
+        screenKill=sharedPreferences.getString("screenoffkill", null);
+        useGPStest=sharedPreferences.getString("useGPS", null);
+        leaveNetOntest=sharedPreferences.getString("leaveNetOn", null);
+        optimizeAsILeavetest=sharedPreferences.getString("optimizeAsILeave", null);
+
+
+         Log.i("headerName",String.valueOf(game));
+         Log.i("headerName",String.valueOf(develop));
+         Log.i("headerName",String.valueOf(background));
+         Log.i("headerName",String.valueOf(progressBar));
        // Toast.makeText(MainActivity.this, headerProfileName, Toast.LENGTH_LONG).show();
         startService();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -126,6 +140,42 @@ public void changewifi(View view){
         am.killBackgroundProcesses("com.whatsapp");
         Toast.makeText(MainActivity.this, "Major Social Apps has been closed", Toast.LENGTH_SHORT).show();
     }
+
+    public void saveGeoSetting(View view){
+        useGPS=(CheckBox)findViewById(R.id.GPScheckbox);
+        optimizeAsILeave=(CheckBox)findViewById(R.id.leaveoptimize);
+        leaveNetOn=(CheckBox)findViewById(R.id.networkCheckbox);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        if(useGPS.isChecked() == true) {
+
+            editor.putString("useGPS","active");
+            editor.commit();
+            useGPStest = sharedPreferences.getString("useGPS",null);
+        }
+        else{
+            sharedPreferences.edit().remove("useGPS").commit();
+            useGPStest=null;
+        }
+        if(optimizeAsILeave.isChecked() == true) {
+            editor.putString("optimizeAsILeave", "active");
+            editor.commit();
+            optimizeAsILeavetest = sharedPreferences.getString("optimizeAsILeave",null);
+        }
+        else{
+            sharedPreferences.edit().remove("optimizeAsILeave").commit();
+            optimizeAsILeavetest=null;
+        }
+        if(leaveNetOn.isChecked() == true) {
+            editor.putString("leaveNetOn","active");
+            editor.commit();
+            leaveNetOntest = sharedPreferences.getString("leaveNetOn",null);
+        }
+        else{
+            sharedPreferences.edit().remove("leaveNetOn").commit();
+            leaveNetOntest=null;
+        }
+    }
+
     public void saveSettingPref(View view){
 
         backgroundCheck=(CheckBox)findViewById(R.id.remainInBackground);
@@ -147,6 +197,11 @@ public void changewifi(View view){
         }
 
         Toast.makeText(this, "Setting has been saved.It will be applied after restart.", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void saveOptimizationProgress(View view){
+        SeekBar optimizeseekbar = (SeekBar) findViewById(R.id.optimizationseekbar);
 
     }
     public void saveProfileOption(View view){
