@@ -32,17 +32,15 @@ public class SettingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        main=(MainActivity)getActivity();
         rootView =  inflater.inflate(R.layout.fragment_setting, container, false);
         initView();
-        checkSavedPref();
         return rootView;
     }
     private void initView(){
         remainInBackground = (CheckBox) rootView.findViewById(R.id.remainInBackground);
         screenOffKill = (CheckBox) rootView.findViewById(R.id.screenOffKill);
-    }
-    private void checkSavedPref(){
-        main=(MainActivity)getActivity();
+
         if(main.background!=null){
             // Toast.makeText(rootView.getContext(), "Active", Toast.LENGTH_SHORT).show();
             remainInBackground.setChecked(true);

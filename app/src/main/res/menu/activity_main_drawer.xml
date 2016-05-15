@@ -11,10 +11,6 @@
             android:icon="@drawable/ic_navigation_optimize"
             android:title="Optimization Level" />
         <item
-            android:id="@+id/geosetting"
-            android:icon="@drawable/ic_navigation_geo"
-            android:title="Geo Settings" />
-        <item
             android:id="@+id/setting"
             android:icon="@drawable/ic_navigation_setting"
             android:title="Setting" />
